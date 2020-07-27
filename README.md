@@ -1,6 +1,6 @@
 # AWS Acme Instant Tunnel
 Tool to temporarily open an AWS security group
-Services Used:
+## Services Used:
  - Serverless framework (serverless.io)
  - AWS Lambda functions 
  - AWS DynamoDB
