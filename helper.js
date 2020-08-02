@@ -7,13 +7,14 @@ const currentTime = Date.now();
 module.exports.getExpiredLeases = () => {
   var params = {
     TableName: TABLE_NAME,
-    ProjectionExpression: '#date, leaseId',
-    FilterExpression: '#date < :now',
+    FilterExpression: '#date < :now AND #la = :la',
     ExpressionAttributeNames: {
       '#date': 'leaseEnd',
+      '#la': 'leaseActive',
     },
     ExpressionAttributeValues: {
       ':now': currentTime,
+      ':la': true,
     },
   };
   return dynamo
@@ -33,5 +34,30 @@ module.exports.getSecurityGroupId = () => {
     .promise()
     .then((result) => {
       return result.Reservations[0].Instances[0].SecurityGroups[0].GroupId;
+    });
+};
+module.exports.revokePermissions = async (item) => {
+  const id = await this.getSecurityGroupId();
+  const sgParams = {
+    GroupId: id,
+    IpPermissions: [
+      {
+        FromPort: 22,
+        IpProtocol: 'tcp',
+        IpRanges: [
+          {
+            CidrIp: item.ip,
+            Description: `Access for ${item.name}`,
+          },
+        ],
+        ToPort: 22,
+      },
+    ],
+  };
+  ec2
+    .revokeSecurityGroupIngress(sgParams)
+    .promise()
+    .then((result) => {
+      return result;
     });
 };

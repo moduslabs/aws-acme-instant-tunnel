@@ -18,6 +18,9 @@ module.exports.addLease = (event, context, callback) => {
     .promise()
     .then(() => {
       callback(null, createResponse(200, item.leaseId));
+    })
+    .catch(() => {
+      callback(err, null);
     });
   addNewPermissions(event, context, callback);
 };
@@ -25,6 +28,7 @@ module.exports.updateExpiredLeases = async (event, context, callback) => {
   const items = await helper.getExpiredLeases();
   // array of items that match params
   items.forEach((item) => {
+    helper.revokePermissions(item);
     var updatedParams = {
       TableName: TABLE_NAME,
       Key: {
@@ -35,7 +39,6 @@ module.exports.updateExpiredLeases = async (event, context, callback) => {
       ExpressionAttributeValues: {
         ':la': false,
       },
-      ReturnValues: 'UPDATED_NEW',
     };
     dynamo
       .update(updatedParams)
@@ -44,11 +47,11 @@ module.exports.updateExpiredLeases = async (event, context, callback) => {
         if (err) {
           callback(err, null);
         } else {
-          console.log(response);
           callback(null, createResponse(200, response));
         }
       });
   });
+  return items;
 };
 function createResponse(statusCode, message) {
   return {
@@ -66,7 +69,7 @@ async function addNewPermissions(event, context, callback) {
         IpProtocol: 'tcp',
         IpRanges: [
           {
-            CidrIp: `${event.ip}/24`,
+            CidrIp: event.ip,
             Description: `Access for ${event.name}`,
           },
         ],

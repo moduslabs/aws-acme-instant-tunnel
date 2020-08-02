@@ -25,7 +25,6 @@ provider:
         - 'ec2:DescribeInstances'
       Resource:
         - '*'
-
 functions:
   addLease:
     handler: handler.addLease
@@ -33,10 +32,6 @@ functions:
     handler: handler.updateExpiredLeases
     events:
       - schedule: rate(15 minutes)
-  # manageLease:
-  #   handler: handler.manageLease
-  #   events:
-  #     - schedule: rate(15 minutes)
 resources: # CloudFormation template syntax from here on.
   Resources:
     leasesTable:
