@@ -116,7 +116,7 @@ document.getElementById('btn-private').addEventListener('click', async () => {
     },
     body: JSON.stringify({
       leaseActive: true,
-      leaseEnd: currentTime + 3600,
+      leaseEnd: currentTime + 3600000,
       leaseStart: currentTime,
       name: profile.email,
       ip: `${ipAddress}/32`,
