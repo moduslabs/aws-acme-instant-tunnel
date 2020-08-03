@@ -8,4 +8,7 @@ Tool to temporarily open an AWS security group
 - AWS Lambda functions
 - AWS DynamoDB
 - AWS EC2 & Security Groups
-- AWS SAML & SSO Authentication
+- AWS SAML & SSO Authentication via Auth0 (Google G-Suite, Github)
+- AWS API Gateway
+
+
