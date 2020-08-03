@@ -9,12 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.720.0",
+    "aws-sdk": "^2.725.0",
+    "jsonwebtoken": "^8.5.1",
     "serverless": "^1.77.1",
-    "uuid": "^8.2.0",
-    "uuidv4": "^6.2.0"
+    "uuid": "^8.3.0",
+    "uuidv4": "^6.2.1"
   },
   "devDependencies": {
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "serverless-finch": "^2.6.0"
   }
 }
