@@ -33,9 +33,10 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
   - Change USER_AWS_REGION to the region you want to deploy resources in
   - Change S3_BUCKET_NAME to something unique. An error will be thrown if the S3 bucket name is already taken.
 8. Run sls deploy in the command line. 
-9. A URL will be generated under endpoints if deployment runs sucessfully. In app.js, replace PRIVATE_ENDPOINT with this URL. Run 'sls client deploy'. This updates and deploys the front-end. An S3 URL should be generated at this point
-10. Open the AWS Console and go to the EC2 instances section. Launch an EC2 instance (any storage or instance type settings are fine). Change the Security Group to the acme-instant-tunnel group that was generated during deployment.  Generate and key pair and make sure to keep track of the key pair for when you want to SSH into the instance. 
-11. Navigate to the S3 URL. You should be able to log in and click Tunnel into EC2 with a success message 'You can now SSH into the EC2 instance for 1 hour'. After this, you can try to connect to the EC2 instance via SSH and it should work.
+9. A URL will be generated under endpoints if deployment runs sucessfully. In app.js, replace PRIVATE_ENDPOINT with this URL. Run 'sls client deploy'. This updates and deploys the front-end.
+10. With a successful front-end deployment, you should get an S3 URL where the web app is hosted. Copy this URL and go to Auth0 settings. Find 'Allowed Callback URIs' under Application URIs and paste the S3 URL into this box. Make sure to Save Changes at the bottom.
+11. Open the AWS Console and go to the EC2 instances section. Launch an EC2 instance (any storage or instance type settings are fine). Configure an existing security group and select the acme-instant-tunnel group that was generated during deployment.  Generate and key pair and make sure to keep track of the key pair for when you want to SSH into the instance. 
+12. Navigate to the S3 URL that was generated in Steps 9-10. You should be able to log in and click Tunnel into EC2 with a success message 'You can now SSH into the EC2 instance for 1 hour'. After this, you can try to connect to the EC2 instance via SSH and it should work.
 
 # How it works
 
