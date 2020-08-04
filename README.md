@@ -24,7 +24,7 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 
 1. Make sure AWS credentials are properly configured before starting. You can do this by running 'aws configure' on the command line.
 2. Clone this repository and run `npm install`
-3. Go to Auth0 https://auth0.com/ and sign up for an account. Go to Applications and click on your Default App. Here you can find your Auth0 development credentials for the next steps. Save the Client ID and Domain.
+3. Go to [Auth0](https://auth0.com/) and sign up for an account. Go to Applications and click on your Default App. Here you can find your Auth0 development credentials for the next steps. Save the Client ID and Domain.
 4. Navigate to the secrets.json file and replace `AUTH0_CLIENT_ID` with the Client ID found in the previous step. 
 5. Go back to Auth0 Application settings and click on Show Advanced Settings -> Certificates. Copy and paste the Signing Certificate into the `public_key` file. 
 6. Navigate to `frontend/app.js`. Replace `AUTH0_CLIENT_ID` with the Client ID and `AUTH0_DOMAIN` with the Domain found in Step 3. 
@@ -40,7 +40,7 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 
 # How it works
 
-The tool is hosted on a S3 bucket. A basic front-end demo can be accessed [here] (http://acme-instant-tunnel.s3-website-us-east-1.amazonaws.com/) </br>
+The tool is hosted on a S3 bucket. A basic front-end demo can be accessed [here](http://acme-instant-tunnel.s3-website-us-east-1.amazonaws.com/) </br>
 <img src='/images/Homepage.png' width="400">
 
 Users are authenticated and authorized through Auth0. You are able to configure different Identity Providers but by default Google G-Suite is available. 
