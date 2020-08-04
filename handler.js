@@ -103,6 +103,7 @@ module.exports.addLease = (event, context, callback) => {
 };
 module.exports.updateExpiredLeases = async (event, context, callback) => {
   const items = await helper.getExpiredLeases();
+  console.log(items);
   // array of items that match params
   items.forEach((item) => {
     helper.revokePermissions(item);
@@ -124,6 +125,7 @@ module.exports.updateExpiredLeases = async (event, context, callback) => {
         if (err) {
           callback(err, null);
         } else {
+          console.log(response)
           callback(null, createResponse(200, response));
         }
       });
