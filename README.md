@@ -55,7 +55,7 @@ The underlying resources - AWS Lambda functions, DynamoDB table, and Security Gr
 When the 'Tunnel into EC2' button is clicked, it triggers a Lambda function that adds an entry to the preconfigured DynamoDB table and a temporary permission into the preconfigured Security Group that is connected to an EC2 instance that the user provisioned.
 <br/>
 
-DynamoDB holds information such as Email, IP Address, and information about the "lease" - when the temporary security group permissions start, end, and the status of them. The time information is held in [milliseconds since Epoch] (https://currentmillis.com/)
+DynamoDB holds information such as Email, IP Address, and information about the "lease" - when the temporary security group permissions start, end, and the status of them. The time information is held in [milliseconds since Epoch](https://currentmillis.com/)
 <img src="/images/Dynamo.png"> </br> 
 Security Group is added based on the IP Address & email held in the DynamoDB table. 
 </br> 
