@@ -2,11 +2,14 @@ service: acme-instant-tunnel
 provider:
   name: aws
   runtime: nodejs12.x
-  region: us-east-1
+  region: ${self:provider.environment.USER_AWS_REGION}
   environment:
     DYNAMODB_TABLE: leasesTable
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
     AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key)}
+    VPC_ID: vpc-761df40b
+    USER_AWS_REGION: us-east-1
+    S3_BUCKET_NAME: acme-instant-tunnel
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
@@ -31,7 +34,7 @@ plugins:
   - serverless-finch
 custom:
   client:
-    bucketName: acme-instant-tunnel
+    bucketName: ${self:provider.environment.S3_BUCKET_NAME}
     distributionFolder: frontend
     errorDocument: index.html
 functions:
@@ -74,19 +77,7 @@ resources: # CloudFormation template syntax from here on.
       Properties:
         GroupName: acmeInstantTunnel
         GroupDescription: Managed by Lambda
-        VpcId: vpc-761df40b
-    managedEC2:
-      Type: AWS::EC2::Instance
-      Properties:
-        AvailabilityZone: 'us-east-1a'
-        ImageId: ami-0e9089763828757e1
-        InstanceType: t2.micro
-        NetworkInterfaces:
-          - Description: Primary network interface
-            DeviceIndex: '0'
-            SubnetId: subnet-cf34e9a9
-            GroupSet:
-              - Ref: managedSecurityGroup
+        VpcId: ${self:provider.environment.VPC_ID}
     GatewayResponse:
       Type: 'AWS::ApiGateway::GatewayResponse'
       Properties:
