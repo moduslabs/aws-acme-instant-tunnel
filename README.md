@@ -80,7 +80,7 @@ Testing can be done using AWS SDK
 
 ## Contributing
 
-Check out the [contributing guide] (https://github.com/moduslabs/aws-acme-instant-tunnel/blob/master/.github/CONTRIBUTING.md)
+Check out the [contributing guide](/.github/CONTRIBUTING.md)
 
 # Modus Create
 
