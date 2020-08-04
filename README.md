@@ -40,8 +40,32 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 
 # How it works
 
-{Describe how it works. Include images if possible.}
+The tool is hosted on a S3 bucket. </br>
+<img src='/images/Homepage.png' width="400">
 
+Users are authenticated and authorized through Auth0. You are able to configure different Identity Providers but by default Google G-Suite is available. 
+
+<img src='/images/Auth0.png' width= "400">
+
+Once logged in, users can click Tunnel into EC2 to gain access to the EC2 instance that was previously set up. </br>
+
+<img src="/images/TunnelSuccess.png" width="400">
+
+The underlying resources - AWS Lambda functions, DynamoDB table, and Security Groups - have all been configured by CloudFormation via Serverless Framework.
+When the 'Tunnel into EC2' button is clicked, it triggers a Lambda function that adds an entry to the preconfigured DynamoDB table and a temporary permission into the preconfigured Security Group that is connected to an EC2 instance that the user provisioned.
+<br/>
+
+DynamoDB holds information such as Email, IP Address, and information about the "lease" - when the temporary security group permissions start, end, and the status of them. The time information is held in [milliseconds since Epoch] (https://currentmillis.com/)
+<img src="/images/Dynamo.png"> </br> 
+Security Group is added based on the IP Address & email held in the DynamoDB table. 
+</br> 
+<img src="/images/SGSuccess.png">
+
+Another Lambda function runs in the background on a 15 minute Cloudwatch Event. It checks if the lease has expired. If it has, the DynamoDB item has its status changed to `false` and the security group permission is revoked.
+<img src="/images/DynamoFalse.png">
+</br>
+</br>
+<img src="/images/SGRemoved.png">
 # Developing
 
 {Show how engineers can set up a development environment and contribute.}
