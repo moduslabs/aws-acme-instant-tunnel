@@ -10,3 +10,6 @@ Tool to temporarily open an AWS security group
 - AWS EC2 & Security Groups
 - AWS SAML & SSO Authentication via Auth0 (Google G-Suite, Github)
 - AWS API Gateway
+- AWS S3 Static Front-End
+
+Created as part of Modus Labs Open Source Projects
