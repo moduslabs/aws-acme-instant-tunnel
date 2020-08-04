@@ -68,23 +68,21 @@ Another Lambda function runs in the background on a 15 minute Cloudwatch Event. 
 <img src="/images/SGRemoved.png">
 # Developing
 
-{Show how engineers can set up a development environment and contribute.}
+A development environment can be set up by following the steps outlined in [Getting Started](#getting-started)
 
 ## Prerequisites
 
-{Explain the prerequisites}
+- [AWS Account](aws.amazon.com)
 
 ## Testing
 
-{Notes on testing}
+Testing can be done using AWS SDK
 
 ## Contributing
 
-{How can the community contribute}
+Check out the [contributing guide] (https://github.com/moduslabs/aws-acme-instant-tunnel/blob/master/.github/CONTRIBUTING.md)
 
 # Modus Create
-
-{replace PROJECT_NAME in links below with the name of this project}
 
 [Modus Create](https://moduscreate.com) is a digital product consultancy. We use a distributed team of the best talent in the world to offer a full suite of digital product design-build services; ranging from consumer facing apps, to digital migration, to agile development training, and business transformation.
 
