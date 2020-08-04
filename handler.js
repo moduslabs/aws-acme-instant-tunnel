@@ -125,7 +125,6 @@ module.exports.updateExpiredLeases = async (event, context, callback) => {
         if (err) {
           callback(err, null);
         } else {
-          console.log(response)
           callback(null, createResponse(200, response));
         }
       });
