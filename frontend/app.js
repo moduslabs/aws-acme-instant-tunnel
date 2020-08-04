@@ -1,12 +1,9 @@
 /* global window document localStorage fetch alert */
-
 // Fill in with your values
-const AUTH0_CLIENT_ID = 'srZfVKQ01KiWqdR82gIX8kdNf5dc0goU';
-const AUTH0_DOMAIN = 'acme-instant-tunnel.us.auth0.com';
+const AUTH0_CLIENT_ID = 'REPLACE WITH YOUR CLIENT ID';
+const AUTH0_DOMAIN = 'REPLACE WITH YOUR DOMAIN';
 const AUTH0_CALLBACK_URL = window.location.href; // eslint-disable-line
-//const PUBLIC_ENDPOINT = 'https://your-aws-endpoint-here.amazonaws.com/dev/api/public';
-const PRIVATE_ENDPOINT =
-  'https://3sjh80uyof.execute-api.us-east-1.amazonaws.com/dev/api/addLease';
+const PRIVATE_ENDPOINT = 'REPLACE WITH YOUR PRIVATE ENDPOINT';
 const currentTime = Date.now();
 // initialize auth0 lock
 const lock = new Auth0Lock(AUTH0_CLIENT_ID, AUTH0_DOMAIN, {
@@ -68,24 +65,6 @@ document.getElementById('btn-logout').addEventListener('click', () => {
   document.getElementById('btn-logout').style.display = 'none';
   document.getElementById('nick').textContent = '';
 });
-
-// Handle public api call
-// document.getElementById('btn-public').addEventListener('click', () => {
-//   // call public API
-//   fetch(PUBLIC_ENDPOINT, {
-//     cache: 'no-store',
-//     method: 'POST',
-//   })
-//     .then(response => response.json())
-//     .then((data) => {
-//       console.log('Message:', data);
-//       document.getElementById('message').textContent = '';
-//       document.getElementById('message').textContent = data.message;
-//     })
-//     .catch((e) => {
-//       console.log('error', e);
-//     });
-// });
 
 // Handle private api call
 document.getElementById('btn-private').addEventListener('click', async () => {

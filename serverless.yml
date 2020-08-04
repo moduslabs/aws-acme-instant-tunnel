@@ -7,9 +7,9 @@ provider:
     DYNAMODB_TABLE: leasesTable
     AUTH0_CLIENT_ID: ${file(./secrets.json):AUTH0_CLIENT_ID}
     AUTH0_CLIENT_PUBLIC_KEY: ${file(./public_key)}
-    VPC_ID: vpc-761df40b
-    USER_AWS_REGION: us-east-1
-    S3_BUCKET_NAME: acme-instant-tunnel
+    VPC_ID: REPLACE WITH YOUR VPC ID
+    USER_AWS_REGION: REPLACE WITH YOUR AWS REGION
+    S3_BUCKET_NAME: REPLACE WITH A UNIQUE S3 BUCKET NAME
   iamRoleStatements:
     - Effect: 'Allow'
       Action:

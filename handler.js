@@ -8,7 +8,6 @@ const TABLE_NAME = process.env.DYNAMODB_TABLE;
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
 const AUTH0_CLIENT_PUBLIC_KEY = process.env.AUTH0_CLIENT_PUBLIC_KEY;
 const ec2 = new AWS.EC2({ apiVersion: '2016-11-15' });
-const currentTime = Date.now();
 let dynamo = new AWS.DynamoDB.DocumentClient();
 
 const generatePolicy = (principalId, effect, resource) => {
