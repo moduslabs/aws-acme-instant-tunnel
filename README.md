@@ -22,21 +22,21 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 
 # Getting Started
 
-1. Make sure AWS credentials are properly configured before starting. You can do this by running 'aws configure' on the command line.
-2. Clone this repository and run `npm install`
+1. Make sure you have the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) installed and that AWS credentials are properly configured before starting. You can do this by running `aws configure` on the command line.
+2. Clone this repository, change directory to it, and run `npm install`
 3. Go to [Auth0](https://auth0.com/) and sign up for an account. Go to Applications and click on your Default App. Here you can find your Auth0 development credentials for the next steps. Save the Client ID and Domain.
-4. Navigate to the secrets.json file and replace `AUTH0_CLIENT_ID` with the Client ID found in the previous step.
-5. Go back to Auth0 Application settings and click on Show Advanced Settings -> Certificates. Copy and paste the Signing Certificate into the `public_key` file.
-6. Navigate to `frontend/app.js`. Replace `AUTH0_CLIENT_ID` with the Client ID and `AUTH0_DOMAIN` with the Domain found in Step 3.
-7. Navigate to the serverless.yml file where you will need to change the environment variables under provider -> environment section.
+4. Edit the `secrets.json` file and replace `AUTH0_CLIENT_ID` with the Client ID found in the previous step.
+5. Go back to Auth0 Application settings and click on _Show Advanced Settings -> Certificates_. Copy and paste the Signing Certificate into the `public_key` file.
+6. Edit `frontend/app.js`. Replace `AUTH0_CLIENT_ID` with the Client ID and `AUTH0_DOMAIN` with the Domain found in Step 3.
+7. Edit the `serverless.yml` file where you will need to change the environment variables under _provider -> environment_ section.
 
 - Change `VPC_ID` to your vpc id. You can find it in the AWS Console in the VPC section under Your VPCs.
 - Change `USER_AWS_REGION` to the region you want to deploy resources in
 - Change `S3_BUCKET_NAME` to something unique. An error will be thrown if the S3 bucket name is already taken.
 
-8. Run sls deploy in the command line.
-9. A URL will be generated under endpoints if deployment runs sucessfully. In app.js, replace `PRIVATE_ENDPOINT` with this URL. Run `sls client deploy` and type Y when prompted. This updates and deploys the front-end.
-10. With a successful front-end deployment, you should get an S3 URL where the web app is hosted. Copy this URL and go to Auth0 settings. Find 'Allowed Callback URIs' under Application URIs and paste the S3 URL into this box. Make sure to Save Changes at the bottom.
+8. Run `sls deploy` at the command line.
+9. A URL will be generated under endpoints if deployment runs sucessfully. In `app.js`, replace `PRIVATE_ENDPOINT` with this URL. Run `sls client deploy` and type Y when prompted. This updates and deploys the front-end.
+10. With a successful front-end deployment, you should get an S3 URL where the web app is hosted. Copy this URL and go to Auth0 settings. Find _Allowed Callback URIs_ under Application URIs and paste the S3 URL into this box. Make sure to Save Changes at the bottom.
 11. Open the AWS Console and go to the EC2 instances section. Launch an EC2 instance (any storage or instance type settings are fine). Configure an existing security group and select the acme-instant-tunnel group that was generated during deployment. Generate and key pair and make sure to keep track of the key pair for when you want to SSH into the instance.
 12. Navigate to the S3 URL that was generated in Steps 9-10. You should be able to log in and click Tunnel into EC2 with a success message 'You can now SSH into the EC2 instance for 1 hour'. After this, you can try to connect to the EC2 instance via SSH and it should work.
 
@@ -54,10 +54,10 @@ Once logged in, users can click Tunnel into EC2 to gain access to the EC2 instan
 <img src="/images/TunnelSuccess.png" width="400">
 
 The underlying resources - AWS Lambda functions, DynamoDB table, and Security Groups - have all been configured by CloudFormation via Serverless Framework.
-When the 'Tunnel into EC2' button is clicked, it triggers a Lambda function that adds an entry to the preconfigured DynamoDB table and a temporary permission into the preconfigured Security Group that is connected to an EC2 instance that the user provisioned.
+When the _Tunnel into EC2_ button is clicked, it triggers a Lambda function that adds an entry to the preconfigured DynamoDB table and a temporary permission into the preconfigured Security Group that is connected to an EC2 instance that the user provisioned.
 <br/>
 
-DynamoDB holds information such as Email, IP Address, and information about the "lease" - when the temporary security group permissions start, end, and the status of them. The time information is held in [milliseconds since Epoch](https://currentmillis.com/)
+DynamoDB holds information such as Email, IP Address, and information about the "lease" - when the temporary security group permissions start, end, and the status of them. The time information is held in [milliseconds since Epoch](https://currentmillis.com/) format.
 <img src="/images/Dynamo.png"> </br>
 Security Group is added based on the IP Address & email held in the DynamoDB table.
 </br>
@@ -79,11 +79,11 @@ A development environment can be set up by following the steps outlined in [Gett
 
 ## Testing
 
-Testing can be done using AWS SDK
+Testing can be done using the AWS SDK.
 
 ## Contributing
 
-Check out the [contributing guide](/.github/CONTRIBUTING.md)
+Check out the [contributing guide](/.github/CONTRIBUTING.md).
 
 # Modus Create
 
