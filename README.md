@@ -27,7 +27,7 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 3. Go to [Auth0](https://auth0.com/) and sign up for an account. Go to Applications and click on your Default App. Here you can find your Auth0 development credentials for the next steps. Save the Client ID and Domain.
 4. Edit the `secrets.json` file and replace `AUTH0_CLIENT_ID` with the Client ID found in the previous step.
 5. Go back to Auth0 Application settings and click on _Show Advanced Settings -> Certificates_. Copy and paste the Signing Certificate into the `public_key` file.
-6. Edit `frontend/app.js`. Replace `AUTH0_CLIENT_ID` with the Client ID and `AUTH0_DOMAIN` with the Domain found in Step 3.
+6. Edit `frontend/app.js`. Replace `AUTH0_CLIENT_ID` with the Client ID and `AUTH0_DOMAIN` with the Domain found in Step 3. Replace `leaseTime` with the desired time for temporary SSH permissions in __seconds__
 7. Edit the `serverless.yml` file where you will need to change the environment variables under _provider -> environment_ section.
 
 - Change `VPC_ID` to your vpc id. You can find it in the AWS Console in the VPC section under Your VPCs.
