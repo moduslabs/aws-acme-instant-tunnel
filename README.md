@@ -43,7 +43,10 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 # How it works
 
 <img src="/images/Diagram.png" width="800">
-The tool is hosted on a S3 bucket. A basic front-end demo can be accessed [here](http://acme-instant-tunnel.s3-website-us-east-1.amazonaws.com/) </br>
+
+The tool is hosted on a S3 bucket. A basic front-end demo can be accessed [here](http://acme-instant-tunnel.s3-website-us-east-1.amazonaws.com/)
+
+</br>
 <img src='/images/Homepage.png' width="400">
 
 Users are authenticated and authorized through Auth0. You are able to configure different Identity Providers but by default Google G-Suite is available.
