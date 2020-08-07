@@ -100,35 +100,15 @@ module.exports.addLease = (event, context, callback) => {
     });
   addNewPermissions(item, context, callback);
 };
-module.exports.updateExpiredLeases = async (event, context, callback) => {
-  const items = await helper.getExpiredLeases();
-  console.log(items);
-  // array of items that match params
-  items.forEach((item) => {
-    helper.revokePermissions(item);
-    var updatedParams = {
-      TableName: TABLE_NAME,
-      Key: {
-        leaseId: item.leaseId,
-        leaseEnd: item.leaseEnd,
-      },
-      UpdateExpression: 'set leaseActive = :la',
-      ExpressionAttributeValues: {
-        ':la': false,
-      },
-    };
-    dynamo
-      .update(updatedParams)
-      .promise()
-      .then((err, response) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, createResponse(200, response));
-        }
-      });
-  });
-  return items;
+module.exports.updateExpiredLeases = (event, context, callback) => {
+  console.log(event)
+  event.Records.forEach(record => {
+    if(record.eventName == 'REMOVE') {
+      const ip = record.dynamodb.OldImage.ip.S;
+      helper.revokePermissions(ip)
+    }
+  })
+  return event;
 };
 function createResponse(statusCode, message) {
   return {

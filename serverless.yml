@@ -20,6 +20,10 @@ provider:
         - 'dynamodb:ListStreams'
         - 'dynamodb:Query'
         - 'dynamodb:Scan'
+        - dynamodb:DescribeStream
+        - dynamodb:GetRecords
+        - dynamodb:GetShardIterator
+        - dynamodb:ListStreams
       Resource:
         - 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}'
     - Effect: 'Allow'
@@ -37,22 +41,6 @@ custom:
     bucketName: ${self:provider.environment.S3_BUCKET_NAME}
     distributionFolder: frontend
     errorDocument: index.html
-functions:
-  auth:
-    handler: handler.auth
-  addLease:
-    handler: handler.addLease
-    events:
-      - http:
-          path: api/addLease
-          method: post
-          authorizer: auth
-          cors: true
-
-  updateExpiredLeases:
-    handler: handler.updateExpiredLeases
-    events:
-      - schedule: rate(15 minutes)
 resources: # CloudFormation template syntax from here on.
   Resources:
     leasesTable:
@@ -72,6 +60,11 @@ resources: # CloudFormation template syntax from here on.
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+        StreamSpecification: 
+          StreamViewType: OLD_IMAGE
+        TimeToLiveSpecification: 
+          AttributeName: leaseEnd
+          Enabled: true
     managedSecurityGroup:
       Type: AWS::EC2::SecurityGroup
       Properties:
@@ -98,6 +91,24 @@ resources: # CloudFormation template syntax from here on.
         RestApiId:
           Ref: 'ApiGatewayRestApi'
         StatusCode: '401'
+functions:
+  auth:
+    handler: handler.auth
+  addLease:
+    handler: handler.addLease
+    events:
+      - http:
+          path: api/addLease
+          method: post
+          authorizer: auth
+          cors: true
+  updateExpiredLeases:
+    handler: handler.updateExpiredLeases
+    events:
+      - stream:
+          type: dynamodb
+          arn:
+            Fn::GetAtt: [leasesTable, StreamArn]
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
