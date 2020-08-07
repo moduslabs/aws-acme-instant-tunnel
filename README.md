@@ -41,6 +41,7 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 12. Navigate to the S3 URL that was generated in Steps 9-10. You should be able to log in and click Tunnel into EC2 with a success message 'You can now SSH into the EC2 instance for 1 hour'. After this, you can try to connect to the EC2 instance via SSH and it should work.
 
 # How it works
+
 <img src="/images/Diagram.png" width="800">
 The tool is hosted on a S3 bucket. A basic front-end demo can be accessed [here](http://acme-instant-tunnel.s3-website-us-east-1.amazonaws.com/) </br>
 <img src='/images/Homepage.png' width="400">
