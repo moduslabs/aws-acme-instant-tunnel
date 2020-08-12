@@ -50,15 +50,15 @@ The code in this project uses the Serverless Framework to configure the underlyi
 When a user clicks _Tunnel into EC2_, it triggers a Lambda function that adds an entry to the preconfigured DynamoDB table and a temporary permission into the preconfigured Security Group that is connected to an EC2 instance.
 <br/>
 
-DynamoDB holds information such as Email, IP Address, and information about the "lease" - when the temporary security group permissions start, end, and the status of them. The time information is held in [milliseconds since Epoch](https://currentmillis.com/) format.
+An item with lease start and end time, user IP address, and email address are added to DynamoDB table. The timestamps are in seconds since Epoch format. A corresponding security group ingress permission is added. The user can now SSH into this instance.
 <img src="/images/Dynamo.png"> </br>
 Security Group is added based on the IP Address & email held in the DynamoDB table.
 </br>
 <img src="/images/SGSuccess.png">
 
-Another Lambda function runs in the background on a 15 minute Cloudwatch Event. It checks if the lease has expired. If it has, the DynamoDB item has its status changed to `false` and the security group permission is revoked.
-<img src="/images/DynamoFalse.png">
-</br>
+
+The DynamoDB table has TTL enabled on the leaseEnd attribute. When the leaseEnd attribute is expired, the item will automatically delete itself and will also revoke the corresponding security group ingress permission. The user now cannot SSH into this instance.
+
 </br>
 <img src="/images/SGRemoved.png">
 
