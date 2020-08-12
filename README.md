@@ -5,9 +5,17 @@
 
 **AWS Acme Instant Tunnel** is a tool to temporarily grant SSH access via Port 22 for a preconfigured EC2 instance to an authorized & authenticated user.
 
-The following services were used to build this tool: Serverless framework (serverless.com), AWS Lambda w/ Node.js, DynamoDB, EC2 & Security Groups, SAML & SSO Authentication via Auth0 (Google G-Suite, Github), API Gateway, S3 Static Front-End Site Hosting
+This project uses these tools and services:
 
-The CIS security best practices for AWS (4.1) recommends that Port 22 has no public incoming traffic (0.0.0.0/0), so a problem arises when trying to access instances via SSH. A possible solution to this would be manually adding permissions (access from a specified IP address for example) to a instance's security group, but this could be very error prone and inconsistent. Some enterprises deal with this issue by having people VPN into their corporate network and having people SSH from there. However, this doesn't make sense for many distributed organizations where there is no VPN or granting access to a VPN is not a good idea for those who need to SSH into AWS resources.
+* [Serverless framework](https://serverless.com/)
+* [Auth0](https://auth0.com/), providing SAML & SSO Authentication via Google G-Suite or Github
+* [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
+* [AWS Lambda](https://aws.amazon.com/lambda/) with [Node.js](https://nodejs.org/)
+* [Amazon S3]()https://aws.amazon.com/s3/) [Static Web Site Hosting](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+* [DynamoDB](https://aws.amazon.com/dynamodb/)
+* [AWS EC2](https://aws.amazon.com/ec2/) including [VPC Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
+
+The [CIS security benchmark for AWS](https://www.cisecurity.org/benchmark/amazon_web_services/) recommends that Port 22 should have no public incoming traffic (0.0.0.0/0), so a problem arises when trying to access instances via SSH. A possible solution to this would be manually adding permissions (access from a specified IP address for example) to a instance's security group, but this could be very error prone and inconsistent. Some enterprises deal with this issue by having people VPN into their corporate network and having people SSH from there. However, this doesn't make sense for many distributed organizations where there is no VPN or granting access to a VPN is not a good idea for those who need to SSH into AWS resources.
 
 AWS Acme Instant Tunnel presents an alternative to the two aforementioned approaches by _automating_ the authorization, management and storage of security group permissions for temporary SSH access.
 
@@ -91,9 +99,8 @@ Check out the [contributing guide](/.github/CONTRIBUTING.md).
 
 # References
 
-* The classic Warner Brothers cartoon _Fast and Furry-ous_ (https://www.youtube.com/watch?v=4iWvedIhWjM and https://en.wikipedia.org/wiki/Fast_and_Furry-ous) 
-* https://serverless.com/
-* Holepunch (https://github.com/erik/holepunch) - python CLI for doing much the same thing, MIT licensed
+* The classic Warner Brothers cartoon _Fast and Furry-ous_: [watch it on YouTube](https://www.youtube.com/watch?v=4iWvedIhWjM and [learn about its history on Wikipedia](https://en.wikipedia.org/wiki/Fast_and_Furry-ous) 
+* [Holepunch](https://github.com/erik/holepunch) - python CLI for doing much the same thing, MIT licensed
 
 # Modus Create
 
