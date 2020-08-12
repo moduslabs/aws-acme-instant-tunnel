@@ -89,6 +89,12 @@ Testing can be done using the AWS SDK.
 
 Check out the [contributing guide](/.github/CONTRIBUTING.md).
 
+# References
+
+* The classic Warner Brothers cartoon _Fast and Furry-ous_ (https://www.youtube.com/watch?v=4iWvedIhWjM and https://en.wikipedia.org/wiki/Fast_and_Furry-ous) 
+* https://serverless.com/
+* Holepunch (https://github.com/erik/holepunch) - python CLI for doing much the same thing, MIT licensed
+
 # Modus Create
 
 [Modus Create](https://moduscreate.com) is a digital product consultancy. We use a distributed team of the best talent in the world to offer a full suite of digital product design-build services; ranging from consumer facing apps, to digital migration, to agile development training, and business transformation.
