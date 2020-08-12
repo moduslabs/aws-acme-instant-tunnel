@@ -27,7 +27,7 @@ This project uses these tools and services:
 * [Auth0](https://auth0.com/), providing SAML & SSO Authentication via Google G-Suite or Github
 * [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
 * [AWS Lambda](https://aws.amazon.com/lambda/) with [Node.js](https://nodejs.org/)
-* [Amazon S3]()https://aws.amazon.com/s3/) [Static Web Site Hosting](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+* [Amazon S3](https://aws.amazon.com/s3/) [Static Web Site Hosting](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
 * [DynamoDB](https://aws.amazon.com/dynamodb/)
 * [AWS EC2](https://aws.amazon.com/ec2/) including [VPC Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
 
@@ -102,8 +102,7 @@ Check out the [contributing guide](/.github/CONTRIBUTING.md).
 # References
 
 * The classic Warner Brothers cartoon _Fast and Furry-ous_: [watch it on YouTube](https://www.youtube.com/watch?v=4iWvedIhWjM) and [learn about its history on Wikipedia](https://en.wikipedia.org/wiki/Fast_and_Furry-ous) 
-* [Holepunch](https://github.com/erik/holepunch) - python CLI for doing much the same thing, MIT licensed
-
+* Serverless Auth0 [tutorial](https://www.serverless.com/examples/aws-node-auth0-custom-authorizers-api)
 # Modus Create
 
 [Modus Create](https://moduscreate.com) is a digital product consultancy. We use a distributed team of the best talent in the world to offer a full suite of digital product design-build services; ranging from consumer facing apps, to digital migration, to agile development training, and business transformation.
