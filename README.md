@@ -101,7 +101,7 @@ Check out the [contributing guide](/.github/CONTRIBUTING.md).
 
 # References
 
-* The classic Warner Brothers cartoon _Fast and Furry-ous_: [watch it on YouTube](https://www.youtube.com/watch?v=4iWvedIhWjM and [learn about its history on Wikipedia](https://en.wikipedia.org/wiki/Fast_and_Furry-ous) 
+* The classic Warner Brothers cartoon _Fast and Furry-ous_: [watch it on YouTube](https://www.youtube.com/watch?v=4iWvedIhWjM) and [learn about its history on Wikipedia](https://en.wikipedia.org/wiki/Fast_and_Furry-ous) 
 * [Holepunch](https://github.com/erik/holepunch) - python CLI for doing much the same thing, MIT licensed
 
 # Modus Create
