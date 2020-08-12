@@ -5,16 +5,6 @@
 
 **AWS Acme Instant Tunnel** is a tool to temporarily grant SSH access via Port 22 for a preconfigured EC2 instance to an authorized & authenticated user.
 
-This project uses these tools and services:
-
-* [Serverless framework](https://serverless.com/)
-* [Auth0](https://auth0.com/), providing SAML & SSO Authentication via Google G-Suite or Github
-* [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
-* [AWS Lambda](https://aws.amazon.com/lambda/) with [Node.js](https://nodejs.org/)
-* [Amazon S3]()https://aws.amazon.com/s3/) [Static Web Site Hosting](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
-* [DynamoDB](https://aws.amazon.com/dynamodb/)
-* [AWS EC2](https://aws.amazon.com/ec2/) including [VPC Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
-
 The [CIS security benchmark for AWS](https://www.cisecurity.org/benchmark/amazon_web_services/) recommends that Port 22 should have no public incoming traffic (0.0.0.0/0), so a problem arises when trying to access instances via SSH. A possible solution to this would be manually adding permissions (access from a specified IP address for example) to a instance's security group, but this could be very error prone and inconsistent. Some enterprises deal with this issue by having people VPN into their corporate network and having people SSH from there. However, this doesn't make sense for many distributed organizations where there is no VPN or granting access to a VPN is not a good idea for those who need to SSH into AWS resources.
 
 AWS Acme Instant Tunnel presents an alternative to the two aforementioned approaches by _automating_ the authorization, management and storage of security group permissions for temporary SSH access.
@@ -50,23 +40,33 @@ AWS Acme Instant Tunnel presents an alternative to the two aforementioned approa
 
 # How it works
 
+This project uses these tools and services:
+
+* [Serverless framework](https://serverless.com/)
+* [Auth0](https://auth0.com/), providing SAML & SSO Authentication via Google G-Suite or Github
+* [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
+* [AWS Lambda](https://aws.amazon.com/lambda/) with [Node.js](https://nodejs.org/)
+* [Amazon S3]()https://aws.amazon.com/s3/) [Static Web Site Hosting](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+* [DynamoDB](https://aws.amazon.com/dynamodb/)
+* [AWS EC2](https://aws.amazon.com/ec2/) including [VPC Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
+
 <img src="/images/Diagram.png" width="800">
 
-The tool is hosted on a S3 bucket. A basic front-end demo can be accessed [here](http://acme-instant-tunnel.s3-website-us-east-1.amazonaws.com/)
+The front-end web site is hosted on a S3 bucket. A basic demo can be accessed [here](http://acme-instant-tunnel.s3-website-us-east-1.amazonaws.com/)
 
 </br>
 <img src='/images/Homepage.png' width="400">
 
-Users are authenticated and authorized through Auth0. You are able to configure different Identity Providers but by default Google G-Suite is available.
+Users are authenticated and authorized through Auth0. You are able to configure different Identity Providers but Google G-Suite is the default.
 
 <img src='/images/Auth0.png' width= "400">
 
-Once logged in, users can click Tunnel into EC2 to gain access to the EC2 instance that was previously set up. </br>
+Once logged in, users can click _Tunnel into EC2_ to gain access to an EC2 instance via SSH. </br>
 
 <img src="/images/TunnelSuccess.png" width="400">
 
-The underlying resources - AWS Lambda functions, DynamoDB table, and Security Groups - have all been configured by CloudFormation via Serverless Framework.
-When the _Tunnel into EC2_ button is clicked, it triggers a Lambda function that adds an entry to the preconfigured DynamoDB table and a temporary permission into the preconfigured Security Group that is connected to an EC2 instance that the user provisioned.
+The code in this project uses the Serverless Framework to configure the underlying resources - AWS Lambda functions, DynamoDB table, and Security Groups.
+When a user clicks _Tunnel into EC2_, it triggers a Lambda function that adds an entry to the preconfigured DynamoDB table and a temporary permission into the preconfigured Security Group that is connected to an EC2 instance.
 <br/>
 
 DynamoDB holds information such as Email, IP Address, and information about the "lease" - when the temporary security group permissions start, end, and the status of them. The time information is held in [milliseconds since Epoch](https://currentmillis.com/) format.
