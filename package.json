@@ -11,7 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.725.0",
     "jsonwebtoken": "^8.5.1",
-    "serverless": "^1.78.0",
+    "serverless": "^3.25.1",
     "uuid": "^8.3.0",
     "uuidv4": "^6.2.1"
   },
